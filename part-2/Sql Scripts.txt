@@ -1,0 +1,71 @@
+-- Script to create the Farmer table
+CREATE TABLE Farmer (
+    FarmerID INT PRIMARY KEY,
+    Username NVARCHAR(50) NOT NULL,
+    Password NVARCHAR(50) NOT NULL,
+    Email NVARCHAR(100),
+    FullName NVARCHAR(100) NOT NULL,
+    PhoneNumber NVARCHAR(20),
+    Address NVARCHAR(255)
+);
+
+-- Script to create the Product table
+CREATE TABLE Product (
+    ProductID INT PRIMARY KEY,
+    FarmerID INT FOREIGN KEY REFERENCES Farmer(FarmerID),
+    Name NVARCHAR(100) NOT NULL,
+    Category NVARCHAR(50),
+    ProductionDate DATE,
+    CONSTRAINT FK_Product_Farmer FOREIGN KEY (FarmerID) REFERENCES Farmer(FarmerID)
+);
+
+-- Script to create the Employee table
+CREATE TABLE Employee (
+    EmployeeID INT PRIMARY KEY,
+    Username NVARCHAR(50) NOT NULL,
+    Password NVARCHAR(50) NOT NULL,
+    Email NVARCHAR(100),
+    FullName NVARCHAR(100) NOT NULL,
+    PhoneNumber NVARCHAR(20),
+    Role NVARCHAR(50) -- Additional roles can be added as needed
+);
+
+-- Insert sample data into Farmer table
+INSERT INTO Farmer (FarmerID, Username, Password, Email, FullName, PhoneNumber, Address)
+VALUES 
+(1, 'farmer_zhang', 'password123', 'zhang@example.com', 'Zhang Wei', '1234567890', '123 Farm Lane, Beijing'),
+(2, 'farmer_li', 'password123', 'li@example.com', 'Li Ming', '0987654321', '456 Orchard Road, Shanghai'),
+(3, 'farmer_wang', 'password123', 'wang@example.com', 'Wang Xiaoming', '2345678901', '789 Garden St, Guangzhou'),
+(4, 'farmer_liu', 'password123', 'liu@example.com', 'Liu Hua', '3456789012', '101 Farm Avenue, Shenzhen');
+
+-- Insert sample data into Product table
+INSERT INTO Product (ProductID, FarmerID, Name, Category, ProductionDate)
+VALUES 
+(1, 1, 'Bok Choy', 'Vegetable', '2024-05-01'),
+(2, 1, 'Napa Cabbage', 'Vegetable', '2024-05-10'),
+(3, 1, 'Sichuan Peppercorn', 'Spice', '2024-05-15'),
+(4, 1, 'Chinese Broccoli', 'Vegetable', '2024-05-20'),
+(5, 2, 'Jasmine Rice', 'Grain', '2024-05-05'),
+(6, 2, 'Tofu', 'Protein', '2024-05-12'),
+(7, 2, 'Chinese Eggplant', 'Vegetable', '2024-05-18'),
+(8, 2, 'Chinese Long Beans', 'Vegetable', '2024-05-22'),
+(9, 3, 'Ginger', 'Spice', '2024-05-03'),
+(10, 3, 'Garlic', 'Spice', '2024-05-08'),
+(11, 3, 'Daikon Radish', 'Vegetable', '2024-05-13'),
+(12, 3, 'Water Chestnuts', 'Vegetable', '2024-05-19'),
+(13, 4, 'Lotus Root', 'Vegetable', '2024-05-02'),
+(14, 4, 'Bamboo Shoots', 'Vegetable', '2024-05-07'),
+(15, 4, 'Snow Peas', 'Vegetable', '2024-05-14'),
+(16, 4, 'Shiitake Mushrooms', 'Vegetable', '2024-05-21'),
+(17, 1, 'Chili Peppers', 'Spice', '2024-05-04'),
+(18, 2, 'Brown Rice', 'Grain', '2024-05-09'),
+(19, 3, 'Mung Beans', 'Grain', '2024-05-16'),
+(20, 4, 'Black Fungus', 'Vegetable', '2024-05-23');
+
+-- Insert sample data into Employee table
+INSERT INTO Employee (EmployeeID, Username, Password, Email, FullName, PhoneNumber, Role)
+VALUES 
+(1, 'employee_wang', 'password123', 'wang@example.com', 'Wang Xiaoming', '1122334455', 'Admin'),
+(2, 'employee_chen', 'password123', 'chen@example.com', 'Chen Hua', '5566778899', 'Manager'),
+(3, 'employee_zhou', 'password123', 'zhou@example.com', 'Zhou Mei', '6677889900', 'Support'),
+(4, 'employee_huang', 'password123', 'huang@example.com', 'Huang Lei', '7788990011', 'Support');
